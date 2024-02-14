@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <bitset>
+#include <cstdint>
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -32,11 +33,9 @@ struct cd {
     cd& operator,(const vector<T>& v) {
         cout << "[ ";
         int vs = v.size();
-        for (int i = 0; i < vs - 1; i++)
-            cout << v[i] << ", ";
+        for (int i = 0; i < vs - 1; i++) cout << v[i] << ", ";
 
-        if (vs)
-            cout << v[vs - 1];
+        if (vs) cout << v[vs - 1];
 
         cout << " ] " << endl;
         return *this;
@@ -45,16 +44,25 @@ struct cd {
     cd& operator,(const pair<T, Y>& v) {
         cout << "[ ";
         cout << v.first << ", ";
-        // cout << v.second;
+        cout << v.second;
 
         cout << " ] " << endl;
+        return *this;
+    }
+    template <typename T, typename Y>
+    cd& operator,(const unordered_map<T, Y>& um) {
+        for (auto v : um) {
+            cout << "[ ";
+            cout << v.first << ", ";
+            cout << v.second;
+            cout << " ] " << endl;
+        }
         return *this;
     }
     template <typename T>
     cd& operator,(const list<T>& v) {
         cout << "[ ";
-        for (auto el : v)
-            cout << el << " ";
+        for (auto el : v) cout << el << " ";
         cout << "] " << endl;
         return *this;
     }
@@ -64,8 +72,7 @@ struct cd {
         cout << "[ ";
         for (auto iv : v) {
             cout << "[";
-            for (auto el : iv)
-                cout << el << " ";
+            for (auto el : iv) cout << el << " ";
             cout << "] ";
         }
         cout << "] " << endl;
@@ -77,13 +84,10 @@ struct cd {
         return *this;
     }
     cd& operator!() {
-        cout << endl
-             << "-------------------------" << endl;
+        cout << endl << "-------------------------" << endl;
         return *this;
     }
-    ~cd() {
-        cout << "\n";
-    }
+    ~cd() { cout << "\n"; }
 };
 auto cc = cd();
 
@@ -100,7 +104,8 @@ struct TreeNode {
     TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right)
+        : val(x), left(left), right(right) {}
 };
 
 TreeNode* makeTree(vector<int> data) {
@@ -131,7 +136,6 @@ TreeNode* makeTree(vector<int> data) {
     }
     return root;
 }
-
 
 uint32_t countSetBits(uint32_t n) {
     uint32_t count = 0;
