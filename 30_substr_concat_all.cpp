@@ -2,41 +2,40 @@
 class Solution {
    public:
     vector<int> findSubstring(string s, vector<string> &words) {
-        cc, s, words;
         vector<int> res;
-        const int wl = words[0].length();
-        unordered_map<string, int> ww;
-        for (auto w : words) ww[w]++;
-        auto dd = ww;
-        // cc, dd;
-        for (int k = 0; k < wl; k++) {
-            int ws = k;  // window start
-            for (int i = k; i <= s.length() - wl; i += wl) {
-                string ss = s.substr(i, wl);
-                cc, ss;
-                if (ww.find(ss) == ww.end()) {
-                    dd = ww;
-                    ws = i + wl;
+        unordered_map<string, int> um_full;
+        for (auto w : words) um_full[w]++;
+        const int wlen = words[0].length();
+        const int tl = words.size() * wlen;  // target len
+        for (int k = 0; k < wlen; k++) {
+            int ws = k;               // window start
+            int zc = um_full.size();  // zero count
+            auto um_window = um_full;
+
+            for (int i = k; i < s.length(); i += wlen) {
+                string ss = s.substr(i, wlen);
+                if (um_full.find(ss) == um_full.end()) {
+                    um_window = um_full;  // bad word, reset window
+                    ws = i + wlen;
+                    zc = um_full.size();
                     continue;
                 }
-                if (--dd[ss] == 0) {
-                    dd.erase(ss);
-                    if (dd.size() == 0) {
+                int cur = um_window[ss];
+                int next = --um_window[ss];
+                if (next == 0) zc--;
+                if (cur == 0) zc++;
+                if (i + wlen - ws == tl) {
+                    if (!zc) {
                         res.push_back(ws);
-                        ++dd[s.substr(ws, wl)];
-                        ws += wl;
                     }
-                } else {
-                    dd = ww;
-                    if (--dd[ss] == 0) {
-                        dd.erase(ss);
-                    }
-                    ws = i;
+                    ss = s.substr(ws, wlen);
+                    cur = um_window[ss];
+                    next = ++um_window[ss];
+                    if (next == 0) zc--;
+                    if (cur == 0) zc++;
+                    ws += wlen;
                 }
-                ~cc;
-                cc, dd;
-                cc, dd.size();
-                !cc;
+
             }
         }
         return res;
@@ -48,15 +47,19 @@ int main() {
 
     vector<string> v;
 
-    v = {"foo", "bar"};
-    cc, q.findSubstring("barfoothefoobarman", v);
-    cc, q.findSubstring("zbarfoobarfoobarthefoobarman", v);
-    // cc, q.findSubstring("barfoofoobarthefoobarman", v);
-
-    // v = {"xbc", "pcxbcf", "xb", "cxbc", "pcxbc"};
-    // cc, q.longestStrChain(v);
-
-    // cc, q.longestStrChain(v);
+    // v = {"foo", "bar"};
+    // v = {"bar"};
+    // cc, q.findSubstring("barfoothefoobarman", v);
+    // v = {"word", "good", "best", "good"};
+    // cc, q.findSubstring("wordgoodgoodgoodbestword", v);
+    v = {"fooo", "barr", "wing", "ding", "wing"};
+    cc, q.findSubstring("lingmindraboofooowingdingbarrwingmonkeypoundcake",v);
+    v = {"aa", "aa"};
+    cc, q.findSubstring("aaaaaaaaaaaaaa", v);
+    // Output
+    // [0,2,4,6,8,10]
+    // Expected
+    // [0,1,2,3,4,5,6,7,8,9,10]
 
     return 0;
 }
