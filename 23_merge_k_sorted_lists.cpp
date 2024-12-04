@@ -1,13 +1,5 @@
 #include "LeetCode.h"
 
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
-};
-
 class Solution {
    public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
@@ -19,7 +11,7 @@ class Solution {
             }
         }
         ListNode* res = nullptr;
-        ListNode* cur = nullptr;        
+        ListNode* cur = nullptr;
         for (auto k : ms) {
             cc, k;
             if (!res) {
@@ -55,7 +47,12 @@ int main() {
 
     auto v = q.mergeKLists(data);
     !cc;
-    cc, v;
+
+    for (; v; v = v->next)
+        cc, v->val;
+    // do
+    //     cc, v->val;
+    // while (v = v->next);
 
     for (auto row : data) {
         auto prev = row;

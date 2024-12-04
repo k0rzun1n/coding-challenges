@@ -112,16 +112,14 @@ int main() {
     Solution q;
 
     vector<vector<int>> v;
-    v = {{0, 1, 0},  //
+    v = {{0, 1, 0}, 
          {0, 0, 1},
          {1, 1, 1},
          {0, 0, 0}};
-    v = {{1, 0, 0, 1}};
-    v = {{1, 0, 0, 1}};
-    v = {{1}, {0}, {1}, {1}, {1}, {0}};
-    // v = {{1, 0, 1, 1, 1, 0}};
 
-    cc, q.gameOfLife(v);
+    cc,v;
+    q.gameOfLife(v);
+    cc,v;
 
     return 0;
 }
