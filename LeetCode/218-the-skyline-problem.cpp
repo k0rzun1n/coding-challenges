@@ -19,10 +19,8 @@ class Solution {
             else
                 s.extract(b.second);
             int cur = *s.rbegin();
-            if (prev != cur) {
-                res.emplace_back(std::initializer_list<int>{b.first, cur});
-                prev = cur;
-            }
+            if (prev != cur) 
+                res.emplace_back(std::initializer_list<int>{b.first, prev=cur});
         }
         return res;
     }
