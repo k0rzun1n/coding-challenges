@@ -2,9 +2,11 @@
 
 #include <algorithm>
 #include <bitset>
+#include <condition_variable>
 #include <cstdint>
 #include <ctime>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <limits>
