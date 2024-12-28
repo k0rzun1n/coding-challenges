@@ -19,8 +19,8 @@ class Solution {
             else
                 s.extract(b.second);
             int cur = *s.rbegin();
-            if (prev != cur) 
-                res.emplace_back(std::initializer_list<int>{b.first, prev=cur});
+            if (prev != cur)
+                res.emplace_back(std::initializer_list<int>{b.first, prev = cur});
         }
         return res;
     }
@@ -32,14 +32,8 @@ int main() {
     // LRH -> XH
     //[[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]
     //[[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]
-    // vector<vector<int>> data{{2, 9, 10}, {3, 7, 15}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8}};
     vector<vector<int>> data{{2, 9, 10}, {3, 7, 15}, {3, 7, 25}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8}};
-    // for (size_t i = 0; i < 2 && q.getSkyline({{1,2,3}}).size() > 2; i++) {}
-    // cc, data;
-    // !cc;
-    auto res = q.getSkyline(data);
-    !cc;
-    cc, res;
+    cc, q.getSkyline(data);
 
     return 0;
 }

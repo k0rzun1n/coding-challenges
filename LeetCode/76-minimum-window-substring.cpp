@@ -6,11 +6,11 @@ class Solution {
         for (auto c : t)
             freq[c]++;
 
-        int cnt = 0;  // in t
+        int cnt = 0;
         // left, right, lastvalid, bestL, bestR
         int l = 0, r = 0, lv = 0, bl = 0, br = INT_MAX;
         for (auto i = 0; i < s.size(); i++) {
-            if (--freq[s[i]] >= 0) {
+            if (--freq[s[i]] >= 0) {  // s[i] in t
                 r = i;
                 cnt++;
                 while (cnt == t.size())
