@@ -163,13 +163,14 @@ TreeNode* makeTree(vector<int> data) {
 }
 
 uint32_t countSetBits(uint32_t n) {
-    uint32_t count = 0;
+    uint32_t cnt = 0;
     while (n) {
-        count += n & 1;
-        n >>= 1;
+        cnt++;
+        n &= n - 1;
     }
-    return count;
+    return cnt;
 }
+
 uint32_t bitCount(uint32_t n) {
     n = n - ((n >> 1) & 0x55555555);
     n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
