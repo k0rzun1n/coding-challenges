@@ -16,18 +16,18 @@ class Solution {
     int t;
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         t = targetSum;
-        vector<int> branch(0);
+        vector<int> branch;
         rec(root, branch, 0);
         return rt;
     }
     void rec(TreeNode* root, vector<int>& branch, int sum) {
-        if (root == nullptr) return;
+        if (!root) return;
         branch.push_back(root->val);
         sum += root->val;
         if (sum == t && !root->left && !root->right)
             rt.push_back(branch);
-        if (root->left) rec(root->left, branch, sum);
-        if (root->right) rec(root->right, branch, sum);
+        rec(root->left, branch, sum);
+        rec(root->right, branch, sum);
         branch.pop_back();
         sum -= root->val;
         return;
